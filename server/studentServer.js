@@ -4,7 +4,7 @@ const {response} = require("express");
 const app = express()
 
 app.use((request, response,next)=>{
-    console.log('有人请求了server1')
+    console.log(`${request.get('Host')}请求了server1` )
     next()
 })
 app.get("/students", (request, response) =>{
