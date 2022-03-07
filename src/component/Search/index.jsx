@@ -5,9 +5,10 @@ class Search extends Component {
     search = () => {
         console.log(this.keyWordElement.value)
         let keyWord=this.keyWordElement.value
-        axios.get(`https://api.github.com/search/users?q=${keyWord}`).then(
+        axios.get(`/githubAPI/search/users?q=${keyWord}`).then(
             response=>{
-                console.log(response.data)
+                // console.log(response.data)
+                this.props.saveUsers(response.data.items)
             },
             error=>{
                 console.log(error)
@@ -20,7 +21,7 @@ class Search extends Component {
             <section className="jumbotron">
                 <h3 className="jumbotron-heading">Search Github Users</h3>
                 <div>
-                    <input ref={currentNode => this.keyWordElement = currentNode} type="text" placeholder="输入关键词点击搜索"/>&nbsp;
+                    <input onKeyUp={this.search} ref={currentNode => this.keyWordElement = currentNode} type="text" placeholder="输入关键词点击搜索"/>&nbsp;
                     <button onClick={this.search}>Search</button>
                 </div>
             </section>
