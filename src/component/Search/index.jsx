@@ -1,7 +1,18 @@
 import React, {Component} from 'react';
 import axios from "axios";
+import PubSub from "pubsub-js"
 
 class Search extends Component {
+    state = {
+        users: [],
+        isFirst:true,
+        isLoading:false,
+        err:''
+    }
+    componentDidMount() {
+
+    }
+
     search = () => {
         this.props.updateAppState(
             {
