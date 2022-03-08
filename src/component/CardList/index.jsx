@@ -1,10 +1,25 @@
 import React, {Component} from 'react';
 import CardItem from "../CardItem";
+import PubSub from "pubsub-js";
 
 class CardList extends Component {
+    state = {
+        users: [],
+        isFirst:true,
+        isLoading:false,
+        err:''
+    }
+
+    componentDidMount() {
+        PubSub.subscribe('users topic',(_,stateObj)=>{
+            this.setState(stateObj)
+        })
+
+    }
+
     render() {
-        const {users} = this.props
-        const {state:appState} = this.props
+        const {users}=this.state
+        const appState = this.state
         console.log('card list', users)
         return (
             <div className="row">
