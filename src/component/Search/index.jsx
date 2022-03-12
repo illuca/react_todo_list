@@ -4,17 +4,27 @@ import PubSub from "pubsub-js"
 
 class Search extends Component {
     search = () => {
-
-        PubSub.publish('users topic',{isFirst:false, isLoading: true})
+        PubSub.publish('users topic', {isFirst: false, isLoading: true})
         console.log(this.keyWordElement.value)
 
         let keyWord = this.keyWordElement.value
-        axios.get(`/githubAPI/search/users?q=${keyWord}`).then(
-            response => {
-                PubSub.publish('users topic',{isLoading:false, users: response.data.items})
+
+        fetch(`/githubAPI/search/users?q=${keyWord}`).then(
+            (response) => {
+                console.log('联系服务器成功了, response1: ', response)
+                return response.json()
             },
-            error => {
-                PubSub.publish('users topic', {isLoading: false, err: error.message})
+            (error) => {
+                console.log('联系服务器失败了, error1: ', error)
+            }
+        ).then(
+            (response)=>{
+                console.log('response2: ', response)
+                PubSub.publish('users topic', {isLoading: false, users: response.items})
+            },
+            (error)=>{
+                console.log('error2: ', error)
+                PubSub.publish('users topic', {isLoading: false, err: error})
             }
         )
     }
