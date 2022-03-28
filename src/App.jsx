@@ -20,8 +20,8 @@ class App extends Component {
                                 <div className="list-group">
                                     {/*<a className="list-group-item" href="./about.html">About</a>*/}
                                     {/*<a className="list-group-item active" href="./home.html">Home</a>*/}
-                                    <Link className="list-group-item" to="/about">about</Link>
-                                    <Link className="list-group-item" to="/home">home</Link>
+                                    <Link className="list-group-item" to={"/about"}>about</Link>
+                                    <Link className="list-group-item" to={"/home"}>home</Link>
                                 </div>
                             </div>
                             <div className="col-xs-6">
