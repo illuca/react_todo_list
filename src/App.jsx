@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BrowserRouter, Link, Route} from "react-router-dom";
+import {BrowserRouter, Link, Redirect, Route} from "react-router-dom";
 import About from "./components/About";
 import Home from "./components/Home";
 
@@ -29,6 +29,7 @@ class App extends Component {
                                     <div className="panel-body">
                                         <Route path="/about" component={About}></Route>
                                         <Route path="/home" component={Home}></Route>
+
                                     </div>
                                 </div>
                             </div>

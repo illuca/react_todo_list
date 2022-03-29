@@ -1,21 +1,31 @@
 import React, {Component} from 'react';
+import {Link, Route} from "react-router-dom";
+import Detail from "./Detail";
 
 class Message extends Component {
+    state = {
+        messages: [
+            {id: '001', title: 'message001'},
+            {id: '002', title: 'message002'},
+            {id: '003', title: 'message003'}
+        ]
+    }
+
     render() {
         return (
             <div>
-
+                {/*导航区*/}
                 <ul>
-                    <li>
-                        <a href="/message1">message001</a>&nbsp;&nbsp;
-                    </li>
-                    <li>
-                        <a href="/message2">message002</a>&nbsp;&nbsp;
-                    </li>
-                    <li>
-                        <a href="/message/3">message003</a>&nbsp;&nbsp;
-                    </li>
+                    {
+                        this.state.messages.map(msg => {
+                            return <li key={msg.id}>
+                                <Link to={`/home/message/detail/${msg.id}/${msg.title}`}>{msg.title}</Link>
+                            </li>
+                        })
+                    }
                 </ul>
+                {/*路由组件*/}
+                <Route path={"/home/message/detail/:id/:title"} component={Detail}></Route>
             </div>
         );
     }
