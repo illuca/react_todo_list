@@ -11,6 +11,23 @@ class Message extends Component {
         ]
     }
 
+    handleReplace = (id, title) => {
+        console.log(id, title)
+        this.props.history.replace(`/home/message/detail/${id}/${title}`)
+    }
+    handlePush = (id, title) => {
+        this.props.history.push(`/home/message/detail/${id}/${title}`)
+    }
+    handleBack = () => {
+        this.props.history.goBack()
+    }
+    handleForward = () => {
+        this.props.history.goForward()
+    }
+    handleGo = () => {
+        this.props.history.go(-1)
+    }
+
     render() {
         return (
             <div>
@@ -19,13 +36,20 @@ class Message extends Component {
                     {
                         this.state.messages.map(msg => {
                             return <li key={msg.id}>
-                                <Link to={`/home/message/detail/${msg.id}/${msg.title}`}>{msg.title}</Link>
+                                <Link to={`/home/message/detail/${msg.id}/${msg.title}`}>{msg.title}</Link>&nbsp;&nbsp;
+                                <button onClick={() => this.handlePush(msg.id, msg.title)}>push查看</button>
+                                &nbsp;
+                                <button onClick={() => this.handleReplace(msg.id, msg.title)}>replace查看</button>
                             </li>
                         })
                     }
                 </ul>
+
                 {/*路由组件*/}
-                <Route path={"/home/message/detail/:id/:title"} component={Detail}></Route>
+                <Route path={"/home/message/detail/:id/:title"} component={Detail}/>
+                <button onClick={() => this.handleBack()}>回退</button>
+                <button onClick={() => this.handleForward()}>前进</button>
+                <button onClick={() => this.handleGo()}>Go</button>
             </div>
         );
     }
